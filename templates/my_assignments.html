@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}My Assignments{% endblock %}
+
+{% block content %}
+<h2>My Assignments</h2>
+
+{% for module in modules %}
+  <div class="card p-3 mb-3">
+    <h5>{{ module.title }} ({{ module.course.name }})</h5>
+
+    {% if module.formative_assessment %}
+      <p><strong>Formative Assessment:</strong> 
+        <a href="{{ module.formative_assessment.url }}" target="_blank">Download PDF</a>
+      </p>
+    {% endif %}
+
+    {% if module.summative_assessment %}
+      <p><strong>Summative Assessment:</strong> 
+        <a href="{{ module.summative_assessment.url }}" target="_blank">Download PDF</a>
+      </p>
+    {% endif %}
+  </div>
+{% empty %}
+  <p>No assignments available.</p>
+{% endfor %}
+
+{% endblock %}

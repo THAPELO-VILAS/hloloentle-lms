@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}All Available Courses{% endblock %}
+
+{% block content %}
+<h2>All Available Courses</h2>
+
+<div class="row">
+  {% for course in courses %}
+    <div class="col-md-6 mb-3">
+      <div class="card p-3">
+        <h5>{{ course.name }}</h5>
+        <p><strong>SAQA ID:</strong> {{ course.saqa_id }}</p>
+        <p><strong>NQF Level:</strong> {{ course.nqf_level }}</p>
+        <p><strong>Credit:</strong> {{ course.credit }}</p>
+      </div>
+    </div>
+  {% empty %}
+    <p>No courses available at the moment.</p>
+  {% endfor %}
+</div>
+{% endblock %}

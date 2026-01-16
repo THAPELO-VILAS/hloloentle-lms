@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %} 
+
+{% block content %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg" style="background-color: #004080;">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">SA HLOLO ENTLE LEARNING MANAGEMENT SYSTEM Dashboard</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Sidebar -->
+<div class="sidebar" style="background-color: #001f4d; color: white; height: 100vh; padding: 20px; position: fixed; width: 220px;">
+  <h4>Welcome, {{ user.first_name }} {{ user.last_name }}</h4>
+  <p>Student ID: {{ user.studentprofile.student_id|default:"N/A" }}</p>
+  <hr>
+  <nav>
+    <ul>
+      <!-- <li><a href="#">My Courses</a></li> -->
+      <!-- <li><a href="{% url 'enrolled_courses' %}">My Courses</a></li> -->
+      <li><a href="{% url 'paid_courses' %}">My/ Paid Courses</a></li>
+      <li><a href="{% url 'unpaid_courses' %}">Unpaid Courses</a></li>
+
+      <!-- <li><a href="#">Assignments</a></li> -->
+      <li><a href="{% url 'my_assignments' %}">Assignments</a></li>
+
+      <!-- <li><a href="#">Progress</a></li> -->
+      <li><a href="{% url 'student_progress' %}">Progress</a></li>
+
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Main Content -->
+<div class="main-content" style="margin-left: 240px; padding: 30px; background: #f4f7fc;">
+ 
+<div class="row">
+  {% for course in courses %}
+  <div class="col-md-6 mb-3"> <!-- col-md-6 means 2 cards per row on medium+ screens -->
+    <div class="card p-3" style="border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+      <h5>{{ course.name }}</h5>
+      <p><strong>SAQA ID:</strong> {{ course.saqa_id }}</p>
+      <p><strong>NQF Level:</strong> {{ course.nqf_level }}</p>
+      <p><strong>Credit:</strong> {{ course.credit }}</p>
+      <p><strong>Fee:</strong> R{{ course.fee }}</p>
+      <a href="{% url 'enroll_course' course.id %}" class="btn btn-primary btn-sm">Enroll</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+  
+
+  <h2>Your Courses</h2>
+  <a href="{% url 'enrolled_courses' %}" class="btn btn-primary mb-3">View All Enrolled Courses</a>
+
+  <div class="row">
+    {% for enrollment in enrollments %}
+    <div class="col-md-6 mb-3">
+      <div class="card p-3" style="border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h5>{{ enrollment.course.name }}</h5>
+        <p><strong>SAQA ID:</strong> {{ enrollment.course.saqa_id }}</p>
+        <p><strong>NQF Level:</strong> {{ enrollment.course.nqf_level }}</p>
+        <p><strong>Credit:</strong> {{ enrollment.course.credit }}</p>
+        {% if enrollment.is_paid %}
+          <span class="badge bg-success">Paid</span>
+        {% else %}
+          <a href="{% url 'pay_course' enrollment.course.id %}" class="btn btn-primary btn-sm">Pay for Course</a>
+        {% endif %}
+      </div>
+    </div>
+    {% empty %}
+      <p>You have not enrolled in any courses yet.</p>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}

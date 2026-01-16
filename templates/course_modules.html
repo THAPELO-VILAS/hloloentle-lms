@@ -1,0 +1,45 @@
+<div class="container mt-4">
+    <h2>{{ course.name }} — Modules</h2>
+    <p><strong>SAQA:</strong> {{ course.saqa_id }} |
+       <strong>NQF:</strong> {{ course.nqf_level }} |
+       <strong>Total Credits:</strong> {{ course.credit }}</p>
+  
+    <a href="{% url 'enrolled_courses' %}" class="btn btn-secondary mb-3">Back to My Courses</a>
+  
+    <h4>Knowledge Modules</h4>
+    <ul class="list-group mb-3">
+      {% for m in modules %}
+        {% if m.module_type == "KM" %}
+          <li class="list-group-item">
+            <strong>{{ m.code }}</strong> — {{ m.title }}
+            <span class="float-end">Level {{ m.nqf_level }}, {{ m.credits }} Credits</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  
+    <h4>Practical Skills Modules</h4>
+    <ul class="list-group mb-3">
+      {% for m in modules %}
+        {% if m.module_type == "PM" %}
+          <li class="list-group-item">
+            <strong>{{ m.code }}</strong> — {{ m.title }}
+            <span class="float-end">Level {{ m.nqf_level }}, {{ m.credits }} Credits</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  
+    <h4>Work Experience Modules</h4>
+    <ul class="list-group">
+      {% for m in modules %}
+        {% if m.module_type == "WM" %}
+          <li class="list-group-item">
+            <strong>{{ m.code }}</strong> — {{ m.title }}
+            <span class="float-end">Level {{ m.nqf_level }}, {{ m.credits }} Credits</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  

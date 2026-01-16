@@ -1,0 +1,20 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}SA HLOLO ENTLE LMS{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background: linear-gradient(to right, #f4f7fc, #e0e7ff);">
+    <div class="text-center p-5 bg-white rounded-4 shadow" style="max-width: 500px;">
+        <img src="{% static 'images/Logo.png' %}" alt="LMS Logo" style="width: 100px; margin-bottom: 20px;">
+        <h1 class="mb-3" style="color: #001f4d;">Welcome to SA HLOLO ENTLE LEARNING MANAGEMENT SYSTEM</h1>
+        <p class="mb-4" style="color: #333; font-size: 18px;">Discover, learn, and track your courses anytime, anywhere!</p>
+        <a href="{% url 'login' %}" class="btn btn-primary me-2" style="width: 120px;">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-primary" style="width: 120px;">Register</a>
+    </div>
+</div>
+{% endblock %}
+
+

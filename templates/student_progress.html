@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Student Progress{% endblock %}
+
+{% block content %}
+<h2>Student Progress</h2>
+
+{% for progress in progress_data %}
+<div class="card p-3 mb-3">
+    <h5>{{ progress.course.name }}</h5>
+    <p>Completed Modules: {{ progress.completed_modules }} / {{ progress.total_modules }}</p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{ progress.progress_percent }}%;" aria-valuenow="{{ progress.progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+        {{ progress.progress_percent|floatformat:2 }}%
+      </div>
+    </div>
+</div>
+{% empty %}
+<p>No progress available.</p>
+{% endfor %}
+
+{% endblock %}

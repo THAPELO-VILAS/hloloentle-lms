@@ -2,3 +2,5 @@ Django
 gunicorn
 dj-database-url   # if using PostgreSQL
 psycopg2-binary   # if using PostgreSQL
+whitenoise==6.5.0
+
